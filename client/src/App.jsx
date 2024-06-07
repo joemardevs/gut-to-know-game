@@ -1,0 +1,42 @@
+import PrivateRoute from "./Components/PrivateRoute";
+import PublicRoute from "./Components/PublicRoute";
+import AboutTheGame from "./Pages/AboutTheGame";
+import Authors from "./Pages/Authors";
+import { Home } from "./Pages/Home";
+import Level from "./Pages/Levels/Level";
+import Play from "./Pages/Play";
+import Profile from "./Pages/Profile";
+import Question from "./Pages/Questions/Question";
+import SignIn from "./Pages/SignIn";
+import SignUp from "./Pages/SignUp";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+
+function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route element={<PrivateRoute />}>
+          <Route path="/" element={<Home />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/authors" element={<Authors />} />
+          <Route path="/about-the-game" element={<AboutTheGame />} />
+          <Route path="/play" element={<Play />} />
+          <Route path="/play/level" element={<Level />} />
+          <Route
+            path="/play/level/:level/question/:question/:id"
+            element={<Question />}
+          />
+        </Route>
+
+        <Route element={<PublicRoute />}>
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
+        </Route>
+
+        <Route path="*" element={<h1>Not Found</h1>} />
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export default App;
