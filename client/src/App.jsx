@@ -9,11 +9,11 @@ import Profile from "./Pages/Profile";
 import Question from "./Pages/Questions/Question";
 import SignIn from "./Pages/SignIn";
 import SignUp from "./Pages/SignUp";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route element={<PrivateRoute />}>
           <Route path="/" element={<Home />} />
@@ -35,7 +35,7 @@ function App() {
 
         <Route path="*" element={<h1>Not Found</h1>} />
       </Routes>
-    </BrowserRouter>
+    </Router>
   );
 }
 
