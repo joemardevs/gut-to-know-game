@@ -36,6 +36,7 @@ const Level = () => {
 
   const getQuestions = async () => {
     try {
+      if (!user?.token) return;
       const response = await fetch(
         `/api/question?level=${searchParams.get("level")}`,
         {
@@ -93,7 +94,7 @@ const Level = () => {
   useEffect(() => {
     document.title = "Level 1";
     getQuestions();
-  }, []);
+  }, [user]);
 
   if (error) {
     return (
@@ -173,6 +174,9 @@ const Level = () => {
                           : "red"
                         : null
                     }
+                    bg={!question.isAnswered ? "grey" : null}
+                    _active={{ bg: "grey" }}
+                    _hover={{ bg: "grey" }}
                     onClick={() => handleQuestionClick(question, index)}
                     rounded="5"
                     display="flex"
