@@ -1,12 +1,9 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { useAuth } from "../Context/AuthContext";
 
 const PublicRoute = () => {
-  const { isAuthenticated } = useAuth();
+  const user = localStorage.getItem("user");
 
-  console.log("isAuthenticated", isAuthenticated);
-
-  return !isAuthenticated ? <Outlet /> : <Navigate to="/" />;
+  return user ? <Navigate to="/" /> : <Outlet />;
 };
 
 export default PublicRoute;
