@@ -8,7 +8,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import MasterLayout from "../../Layouts/MasterLayout";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
 import useToggle from "../../hooks/useToggle";
