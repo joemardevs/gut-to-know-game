@@ -5,6 +5,7 @@ import {
   IconButton,
   Img,
   Text,
+  position,
   useToast,
 } from "@chakra-ui/react";
 import MasterLayout from "../../Layouts/MasterLayout";
@@ -24,6 +25,7 @@ const Question = () => {
 
   const fetchQuestion = async () => {
     try {
+      if (!user?.token) return;
       const response = await fetch(`/api/question/get-question/${id}`, {
         headers: {
           x_auth_token: user?.token,
@@ -105,7 +107,7 @@ const Question = () => {
 
   useEffect(() => {
     fetchQuestion();
-  }, [id]);
+  }, [user]);
 
   return (
     <MasterLayout
@@ -116,6 +118,7 @@ const Question = () => {
         justifyContent: "center",
         alignItems: "center",
         overflow: "auto",
+        position: "relative",
       }}>
       <IconButton
         onClick={() => navigate(-1)}
