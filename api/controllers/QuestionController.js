@@ -5,7 +5,7 @@ import { errorHandler } from "../utils/index.js";
 export const getQuestions = async (req, res) => {
     try {
         //get params
-        const { level } = req.query;
+        const { level } = req.params;
 
         const questions = await Question.find({ level });
         res.status(200).send({

@@ -19,7 +19,7 @@ import {
 } from "@chakra-ui/react";
 import { FaExclamation, FaMap } from "react-icons/fa";
 import { IoIosExit } from "react-icons/io";
-import { Link, useNavigate, useSearchParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useToggle from "../../hooks/useToggle";
 import Loading from "../../Components/Loading";
 import { useAuth } from "../../Context/AuthContext";
@@ -27,7 +27,7 @@ import { useAuth } from "../../Context/AuthContext";
 const Level = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const navigate = useNavigate();
-  const [searchParams] = useSearchParams();
+  const { level } = useParams();
   const toast = useToast();
   const { user } = useAuth();
   const [isPageLoading, , disabledLoading] = useToggle(true);
@@ -36,15 +36,13 @@ const Level = () => {
 
   const getQuestions = async () => {
     try {
+      console.log("Fetching questions", level);
       if (!user?.token) return;
-      const response = await fetch(
-        `/api/question?level=${searchParams.get("level")}`,
-        {
-          headers: {
-            x_auth_token: user?.token,
-          },
-        }
-      );
+      const response = await fetch(`/api/question/level/${level}`, {
+        headers: {
+          x_auth_token: user?.token,
+        },
+      });
       const data = await response.json();
 
       if (!data?.success) {

@@ -5,7 +5,6 @@ import {
   IconButton,
   Img,
   Text,
-  position,
   useToast,
 } from "@chakra-ui/react";
 import MasterLayout from "../../Layouts/MasterLayout";

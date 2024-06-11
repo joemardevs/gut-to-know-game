@@ -4,7 +4,7 @@ import { authMiddleware } from '../middleware/index.js';
 
 const questionRouter = express.Router();
 
-questionRouter.get('/', authMiddleware, getQuestions);
+questionRouter.get('/level/:level', authMiddleware, getQuestions);
 questionRouter.get('/get-question/:id', authMiddleware, getQuestion);
 questionRouter.post('/answered/:id', authMiddleware, questionAnswered);
 

@@ -21,7 +21,7 @@ function App() {
           <Route path="/authors" element={<Authors />} />
           <Route path="/about-the-game" element={<AboutTheGame />} />
           <Route path="/play" element={<Play />} />
-          <Route path="/play/level" element={<Level />} />
+          <Route path="/play/level/:level" element={<Level />} />
           <Route
             path="/play/level/:level/question/:question/:id"
             element={<Question />}

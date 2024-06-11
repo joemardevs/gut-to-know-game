@@ -73,7 +73,7 @@ const Play = () => {
       {/* Level Button */}
       <Button
         as={Link}
-        to="/play/level?level=1"
+        to="/play/level/1"
         borderRadius="full"
         border="5px"
         colorScheme="green"
@@ -87,7 +87,7 @@ const Play = () => {
       </Button>
       <Button
         as={Link}
-        to="/play/level?level=2"
+        to="/play/level/2"
         borderRadius="full"
         border="5px"
         colorScheme="yellow"
@@ -101,7 +101,7 @@ const Play = () => {
       </Button>
       <Button
         as={Link}
-        to="/play/level?level=3"
+        to="/play/level/3"
         borderRadius="full"
         border="5px"
         colorScheme="red"
@@ -115,7 +115,7 @@ const Play = () => {
       </Button>
       <Button
         as={Link}
-        to="/play/level?level=4"
+        to="/play/level/4"
         borderRadius="full"
         border="5px"
         colorScheme="blue"
@@ -130,7 +130,7 @@ const Play = () => {
 
       <Button
         as={Link}
-        to="/play/level?level=5"
+        to="/play/level/5"
         borderRadius="full"
         border="5px"
         colorScheme="purple"
