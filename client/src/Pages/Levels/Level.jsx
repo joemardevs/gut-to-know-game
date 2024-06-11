@@ -31,25 +31,38 @@ const Level = () => {
   const toast = useToast();
   const { user } = useAuth();
   const [isPageLoading, , disabledLoading] = useToggle(true);
+  const [levelData, setLevelData] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState(null);
 
-  const getQuestions = async () => {
+  const fetchLevel = async () => {
     try {
-      console.log("Fetching questions", level);
       if (!user?.token) return;
-      const response = await fetch(`/api/question/level/${level}`, {
-        headers: {
-          x_auth_token: user?.token,
-        },
-      });
-      const data = await response.json();
 
-      if (!data?.success) {
-        throw data;
+      const [levelRes, questionsRes] = await Promise.all([
+        fetch(`/api/level/${level}`, {
+          headers: {
+            x_auth_token: user?.token,
+          },
+        }),
+        fetch(`/api/question/level/${level}`, {
+          headers: {
+            x_auth_token: user?.token,
+          },
+        }),
+      ]);
+
+      const [levelData, questionsData] = await Promise.all([
+        levelRes.json(),
+        questionsRes.json(),
+      ]);
+
+      if (!levelData?.success || !questionsData?.success) {
+        throw levelData || questionsData;
       }
 
-      const shuffledQuestions = shuffleArray(data.questions)
+      setLevelData(levelData);
+      const shuffledQuestions = shuffleArray(questionsData.questions)
         .sort((a, b) => a.isAnswered - b.isAnswered)
         .reverse();
 
@@ -69,12 +82,6 @@ const Level = () => {
   };
 
   const handleQuestionClick = (question, questionIndex) => {
-    console.log("Question clicked", questionIndex);
-    console.log("Question isAnswered", question.isAnswered);
-    console.log(
-      "Previous question isAnswered",
-      questions[questionIndex - 1]?.isAnswered
-    );
     if (!question.isAnswered && !questions[questionIndex - 1]?.isAnswered) {
       return toast({
         title: "Question cannot be opened",
@@ -90,8 +97,8 @@ const Level = () => {
   }, 1000);
 
   useEffect(() => {
-    document.title = "Level 1";
-    getQuestions();
+    document.title = `Level ${level}`;
+    fetchLevel();
   }, [user]);
 
   if (error) {
@@ -107,7 +114,7 @@ const Level = () => {
   ) : (
     <MasterLayout
       wrapperStyle={{
-        backgroundImage: "url('/assets/level_one_bg.png')",
+        backgroundImage: `url(/assets/level_${level}_bg.png)`,
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
@@ -126,10 +133,11 @@ const Level = () => {
           px="5"
           py="1"
           rounded="5">
-          <Badge colorScheme="yellow">Level 1</Badge>
+          <Badge colorScheme="yellow">
+            Level {levelData?.level?.level || "N/A"}
+          </Badge>
           <Text color="white" fontSize=".80em">
-            Organs of the Digestive System and their Interaction with Organs of
-            the Respiratory, Circulatory, and Excretory Systems
+            {levelData?.level?.header || "N/A"}
           </Text>
         </Stack>
 
@@ -185,35 +193,6 @@ const Level = () => {
                     </Text>
                   </Button>
                 )}
-                {/* <Button
-                  as={
-                    (!question.isAnswered &&
-                      questions[index - 1]?.isAnswered) ||
-                    question.isAnswered
-                      ? Link
-                      : null
-                  }
-                  to={`/play/level/${question.level}/question/${index + 1}/${
-                    question._id
-                  }`}
-                  w="6rem"
-                  h="6rem"
-                  colorScheme={
-                    question.isAnswered
-                      ? question?.isQuestionAnsweredCorrect
-                        ? "green"
-                        : "red"
-                      : null
-                  }
-                  onClick={() => handleQuestionClick(question, index + 1)}
-                  rounded="5"
-                  display="flex"
-                  justifyContent="center"
-                  alignItems="center">
-                  <Text color="black" fontSize="1.5em" fontWeight="bold">
-                    {index + 1}
-                  </Text>
-                </Button> */}
               </WrapItem>
             ))
           ) : (
@@ -261,18 +240,12 @@ const Level = () => {
         size="xs">
         <ModalOverlay />
         <ModalContent>
-          <ModalHeader>About Level 1</ModalHeader>
+          <ModalHeader>
+            About Level {levelData?.level?.level || "N/A"}
+          </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            <Text textAlign="justify">
-              In this level, get ready to demonstrate your knowledge of the
-              organs of the digestive system and their functions, along with the
-              processes involved. But wait, there's more! You will also explore
-              the interactions between the digestive system and other organ
-              systems in the body such as respiratory, circulatory, and
-              excretory systems. Are you ready to level up your understanding of
-              how these systems work together? Let’s ace this challenge!
-            </Text>
+            <Text textAlign="justify">{levelData?.level?.about || "N/A"}</Text>
           </ModalBody>
         </ModalContent>
       </Modal>

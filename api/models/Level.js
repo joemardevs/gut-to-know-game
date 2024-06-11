@@ -14,6 +14,10 @@ const LevelSchema = new Schema({
         type: String,
         required: true
     },
+    bgPicFileName: {
+        type: String,
+        required: true
+    },
 });
 
 const Level = mongoose.model("Level", LevelSchema, "levels");

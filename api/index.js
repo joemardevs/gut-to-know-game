@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
 import dotenv from 'dotenv';
-import { authRouter, questionRouter, userRouter } from './routes/index.js';
+import { authRouter, levelRouter, questionRouter, userRouter } from './routes/index.js';
 import cookieParser from 'cookie-parser';
 import cors from 'cors';
 
@@ -35,6 +35,7 @@ app.use(express.json());
 app.use('/api/auth', authRouter);
 app.use('/api/user', userRouter);
 app.use('/api/question', questionRouter);
+app.use('/api/level', levelRouter);
 
 //Middleware to handle errors
 app.use((error, req, res, next) => {
