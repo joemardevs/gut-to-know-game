@@ -1,14 +1,14 @@
 import express from 'express';
-import { profile, signin, signout, signup } from '../controllers/index.js';
+import { AuthController } from '../controllers/index.js';
 import { signinValidator, signupValidator, validate } from '../validators/index.js';
 import { authMiddleware } from '../middleware/index.js';
 
 const authRouter = express.Router();
 
-authRouter.post('/signin', signinValidator, validate, signin)
-authRouter.post('/signup', signupValidator, validate, signup)
-authRouter.post('/signout', authMiddleware, signout);
+authRouter.post('/signin', signinValidator, validate, AuthController.signin)
+authRouter.post('/signup', signupValidator, validate, AuthController.signup)
+authRouter.post('/signout', authMiddleware, AuthController.signout);
 
-authRouter.get("/profile", authMiddleware, profile)
+authRouter.get("/profile", authMiddleware, AuthController.profile)
 
 export default authRouter;

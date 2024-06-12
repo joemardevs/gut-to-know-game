@@ -7,7 +7,7 @@ import dotenv from "dotenv";
 // Load environment variables
 dotenv.config();
 
-export const signup = async (req, res, next) => {
+const signup = async (req, res, next) => {
     try {
         const { username, email, name, password } = req.body;
 
@@ -32,7 +32,7 @@ export const signup = async (req, res, next) => {
     }
 };
 
-export const signin = async (req, res, next) => {
+const signin = async (req, res, next) => {
     try {
         const { username, password } = req.body;
 
@@ -78,7 +78,7 @@ export const signin = async (req, res, next) => {
     }
 }
 
-export const signout = (req, res, next) => {
+const signout = (req, res, next) => {
     try {
         const { x_auth_token } = req.cookies;
 
@@ -95,7 +95,7 @@ export const signout = (req, res, next) => {
 }
 
 
-export const profile = async (req, res, next) => {
+const profile = async (req, res, next) => {
     try {
         const { x_auth_token } = req.cookies;
 
@@ -116,3 +116,6 @@ export const profile = async (req, res, next) => {
         next(errorHandler(500, error.message));
     }
 }
+
+
+export default { signup, signin, signout, profile };

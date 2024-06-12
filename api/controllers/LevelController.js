@@ -1,7 +1,7 @@
 import { Level } from "../models/index.js";
 import { errorHandler } from "../utils/index.js";
 
-export const getLevel = async (req, res, next) => {
+const getLevel = async (req, res, next) => {
     try {
         const { level } = req.params;
 
@@ -20,3 +20,5 @@ export const getLevel = async (req, res, next) => {
         next(errorHandler(500, error.message));
     }
 }
+
+export default { getLevel }

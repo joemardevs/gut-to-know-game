@@ -1,11 +1,11 @@
 import express from 'express';
-import { getQuestion, getQuestions, questionAnswered } from '../controllers/index.js';
+import { QuestionController } from '../controllers/index.js';
 import { authMiddleware } from '../middleware/index.js';
 
 const questionRouter = express.Router();
 
-questionRouter.get('/level/:level', authMiddleware, getQuestions);
-questionRouter.get('/get-question/:id', authMiddleware, getQuestion);
-questionRouter.post('/answered/:id', authMiddleware, questionAnswered);
+questionRouter.get('/level/:level', authMiddleware, QuestionController.getQuestions);
+questionRouter.get('/get-question/:id', authMiddleware, QuestionController.getQuestion);
+questionRouter.post('/answered/:id', authMiddleware, QuestionController.questionAnswered);
 
 export default questionRouter;

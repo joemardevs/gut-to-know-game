@@ -2,7 +2,7 @@ import { ObjectId } from "mongodb";
 import { Question } from "../models/index.js";
 import { errorHandler } from "../utils/index.js";
 
-export const getQuestions = async (req, res) => {
+const getQuestions = async (req, res) => {
     try {
         //get params
         const { level } = req.params;
@@ -18,7 +18,7 @@ export const getQuestions = async (req, res) => {
     }
 }
 
-export const getQuestion = async (req, res, next) => {
+const getQuestion = async (req, res, next) => {
     try {
         const { id } = req.params;
 
@@ -38,7 +38,7 @@ export const getQuestion = async (req, res, next) => {
 }
 
 
-export const questionAnswered = async (req, res, next) => {
+const questionAnswered = async (req, res, next) => {
     try {
         const { id } = req.params;
         const { isQuestionAnsweredCorrect } = req.body;
@@ -61,3 +61,5 @@ export const questionAnswered = async (req, res, next) => {
         next(errorHandler(500, error.message));
     }
 }
+
+export default { getQuestions, getQuestion, questionAnswered }
