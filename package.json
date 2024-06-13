@@ -2,11 +2,11 @@
   "name": "guttoknow",
   "version": "1.0.0",
   "description": "gamification",
-  "main": "index.ts",
+  "main": "app.ts",
   "type": "module",
   "scripts": {
-    "dev": "npx tsx watch api/index.ts",
-    "start": "node api/index.ts"
+    "dev": "npx tsx watch api/app.ts",
+    "start": "node api/app.ts"
   },
   "author": "joemardevs",
   "license": "ISC",

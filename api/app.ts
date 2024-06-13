@@ -49,7 +49,16 @@ app.use("/api/level", levelRouter);
 
 //Middleware to handle errors
 app.use(
-  (error: MiddlewareError, req: Request, res: Response, next: NextFunction) => {
+  (
+    error: MiddlewareError,
+    req: Request,
+    res: Response<{
+      success: boolean;
+      statusCode: number;
+      message: string;
+    }>,
+    next: NextFunction
+  ) => {
     const statusCode = error.statusCode || 500;
     const message = error.message || "Internal Server Error";
 
