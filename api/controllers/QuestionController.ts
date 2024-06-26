@@ -52,7 +52,6 @@ const questionAnswered = async (
     const question = await Question.findById(id);
 
     if (!question) return next(errorHandler(404, "Question not found"));
-    console.log("isQuestionAnsweredCorrect", isQuestionAnsweredCorrect);
 
     question.isAnswered = true;
     question.isQuestionAnsweredCorrect = isQuestionAnsweredCorrect;

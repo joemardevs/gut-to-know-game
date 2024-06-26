@@ -1,7 +1,12 @@
 import express, { Response, Request, NextFunction } from "express";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
-import { authRouter, levelRouter, questionRouter } from "./routes/index.js";
+import {
+  authRouter,
+  levelRouter,
+  questionRouter,
+  trophyRouter,
+} from "./routes/index.js";
 import cookieParser from "cookie-parser";
 import cors from "cors";
 import MiddlewareError from "./types/MiddlewareError.js";
@@ -46,6 +51,7 @@ app.use(express.json());
 app.use("/api/auth", authRouter);
 app.use("/api/question", questionRouter);
 app.use("/api/level", levelRouter);
+app.use("/api/trophy", trophyRouter);
 
 //Middleware to handle errors
 app.use(

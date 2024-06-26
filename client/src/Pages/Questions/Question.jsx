@@ -85,6 +85,9 @@ const Question = () => {
         isClosable: true,
         position: "top",
       });
+
+      await handleTrophy();
+
       return await questionAnswered(true);
     } else {
       toast({
@@ -97,6 +100,32 @@ const Question = () => {
       });
 
       return await questionAnswered(false);
+    }
+  };
+
+  const handleTrophy = async () => {
+    try {
+      if (!user?.token) return;
+
+      const reponse = await fetch("/api/trophy/increment-trophy", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          x_auth_token: user?.token,
+        },
+        body: JSON.stringify({
+          user_id: user?._id,
+          trophy_value: questionData?.trophy,
+        }),
+      });
+
+      const data = await reponse.json();
+
+      if (!data?.success) {
+        throw data;
+      }
+    } catch (error) {
+      console.log("Error fetching user trophy: ", error.message);
     }
   };
 
@@ -118,6 +147,7 @@ const Question = () => {
         alignItems: "center",
         overflow: "auto",
         position: "relative",
+        padding: "1rem",
       }}>
       <IconButton
         onClick={() => navigate(-1)}
@@ -153,7 +183,13 @@ const Question = () => {
               _disabled={{ cursor: "not-allowed" }}
               colorScheme={
                 !isAnswered ? null : choice.isCorrect ? "green" : "red"
-              }>
+              }
+              whiteSpace="normal"
+              overflow="hidden"
+              textAlign="center"
+              width="100%"
+              height="auto"
+              padding=".5rem">
               {choice?.label}
             </Button>
           ))}
@@ -161,14 +197,7 @@ const Question = () => {
       </Flex>
       {isAnswered && (
         <Text color="white" fontSize=".85em" textAlign="center">
-          Your digestive system absorbs water and nutrients from the food you
-          eat. During digestion, your food is broken down into absorbable units
-          of nutrients that enter the tiny blood vessels where blood cells
-          transport the nutrients in different parts of the body through the
-          circulatory system. Your circulatory system now contains these
-          nutrients together with oxygen and water to cells throughout your
-          body. Wastes from the cells are eliminated by your respiratory system,
-          your excretory system, and your skin.
+          {questionData.additional_information}
         </Text>
       )}
     </MasterLayout>

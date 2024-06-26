@@ -21,11 +21,7 @@ const QuestionSchema = new Schema({
     type: Number,
     required: true,
   },
-  header: {
-    type: String,
-    required: true,
-  },
-  about: {
+  additional_information: {
     type: String,
     required: true,
   },

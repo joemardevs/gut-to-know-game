@@ -9,7 +9,6 @@ import {
 } from "@chakra-ui/react";
 import MasterLayout from "../Layouts/MasterLayout";
 import {
-  FaHistory,
   FaPlay,
   FaQuestion,
   FaShareAlt,
@@ -136,6 +135,8 @@ export const Home = () => {
           Play
         </Button>
         <Button
+          as={Link}
+          to="/competitions"
           colorScheme="orange"
           size="md"
           width="60%"
@@ -150,13 +151,6 @@ export const Home = () => {
           width="60%"
           leftIcon={<FaUser />}>
           Profile
-        </Button>
-        <Button
-          colorScheme="orange"
-          size="md"
-          width="60%"
-          leftIcon={<FaHistory />}>
-          History
         </Button>
         <Button
           isLoading={isLoading}

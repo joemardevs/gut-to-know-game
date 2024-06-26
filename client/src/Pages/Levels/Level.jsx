@@ -67,6 +67,7 @@ const Level = () => {
         .reverse();
 
       setQuestions(shuffledQuestions);
+      // setQuestions(questionsData.questions);
     } catch (error) {
       console.log("Error fetching questions: ", error.message);
       setError(error);
@@ -146,7 +147,8 @@ const Level = () => {
             questions.map((question, index) => (
               <WrapItem key={question._id}>
                 {(!question.isAnswered && questions[index - 1]?.isAnswered) ||
-                question.isAnswered ? (
+                question.isAnswered ||
+                (index === 0 && questions.every(q => !q.isAnswered)) ? (
                   <Button
                     as={Link}
                     to={`/play/level/${question.level}/question/${index + 1}/${
@@ -170,6 +172,28 @@ const Level = () => {
                     </Text>
                   </Button>
                 ) : (
+                  // <Button
+                  //   as={Link}
+                  //   to={`/play/level/${question.level}/question/${index + 1}/${
+                  //     question._id
+                  //   }`}
+                  //   w="6rem"
+                  //   h="6rem"
+                  //   colorScheme={
+                  //     question.isAnswered
+                  //       ? question?.isQuestionAnsweredCorrect
+                  //         ? "green"
+                  //         : "red"
+                  //       : null
+                  //   }
+                  //   rounded="5"
+                  //   display="flex"
+                  //   justifyContent="center"
+                  //   alignItems="center">
+                  //   <Text color="black" fontSize="1.5em" fontWeight="bold">
+                  //     {index + 1}
+                  //   </Text>
+                  // </Button>
                   <Button
                     w="6rem"
                     h="6rem"

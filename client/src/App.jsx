@@ -2,6 +2,7 @@ import PrivateRoute from "./Components/PrivateRoute";
 import PublicRoute from "./Components/PublicRoute";
 import AboutTheGame from "./Pages/AboutTheGame";
 import Authors from "./Pages/Authors";
+import Competitions from "./Pages/Competitions/Competitions";
 import { Home } from "./Pages/Home";
 import Level from "./Pages/Levels/Level";
 import Play from "./Pages/Play";
@@ -26,6 +27,7 @@ function App() {
             path="/play/level/:level/question/:question/:id"
             element={<Question />}
           />
+          <Route path="/competitions" element={<Competitions />} />
         </Route>
 
         <Route element={<PublicRoute />}>

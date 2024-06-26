@@ -10,7 +10,7 @@ const MasterLayout = ({ children, wrapperStyle, containerStyle }) => {
         justifyContent="center"
         h="100vh"
         w="100vw"
-        bg="#1A2421">
+        bg="#000">
         <Box
           {...containerStyle}
           borderRadius={{
@@ -32,6 +32,11 @@ const MasterLayout = ({ children, wrapperStyle, containerStyle }) => {
               md: "lg",
             }}
             padding="20px"
+            border={{
+              base: "none",
+              md: "1px solid white",
+            }}
+            bg="#1A2421"
             {...wrapperStyle}>
             {children}
           </Box>
