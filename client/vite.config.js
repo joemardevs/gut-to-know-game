@@ -12,5 +12,14 @@ export default defineConfig({
       }
     },
   },
+  build: {
+    proxy: {
+      '/api': {
+        target: 'https://gut-to-know-game-backend.onrender.com',
+        secure: false,
+        changeOrigin: true,
+      }
+    },
+  },
   plugins: [react()],
 })
