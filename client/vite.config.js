@@ -10,9 +10,19 @@ export default defineConfig({
         target: 'https://gut-to-know-game-backend.onrender.com',
         secure: false,
         changeOrigin: true,
-        rewrite: path => path.replace(/^\/api/, '/api'),
       }
     },
   },
-  plugins: [react()],
+  build: {
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes('node_modules')) {
+            return id.toString().split('node_modules/')[1].split('/')[0].toString();
+          }
+        }
+      }
+    },
+  },
+  plugins: [react()]
 })
