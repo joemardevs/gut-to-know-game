@@ -33,21 +33,11 @@ mongoose
 // Initialize Express
 const app = express();
 
+// Enable CORS
+app.use(cors());
+
 // Parse URL-encoded bodies
 app.use(cookieParser());
-
-const corsOptions = {
-  origin: [
-    "https://gut-to-know.onrender.com/",
-    "https://gut-to-know.vercel.app",
-  ],
-  credentials: true,
-};
-
-// Enable CORS
-app.use(cors(corsOptions));
-
-app.options("*", cors(corsOptions));
 
 // Parse JSON bodies
 app.use(express.json());
