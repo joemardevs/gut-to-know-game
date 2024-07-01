@@ -29,7 +29,6 @@ const useSignIn = () => {
     e.preventDefault();
 
     const response = await handleSignIn(formData);
-    console.log(response);
 
     // if there is an error
     if (!response?.success) {

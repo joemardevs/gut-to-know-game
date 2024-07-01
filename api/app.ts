@@ -37,8 +37,9 @@ const app = express();
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  origin: process.env.FRONTEND_URL || "http://localhost:8080",
   credentials: true,
+  method: ["GET", "POST"],
 };
 
 // Enable CORS
