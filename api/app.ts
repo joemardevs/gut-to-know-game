@@ -39,7 +39,7 @@ app.use(cookieParser());
 const corsOptions = {
   origin: process.env.FRONTEND_URL || "http://localhost:8080",
   credentials: true,
-  method: ["GET", "POST"],
+  methods: ["GET", "POST"],
 };
 
 // Enable CORS
@@ -49,6 +49,12 @@ app.options("*", cors(corsOptions));
 
 // Parse JSON bodies
 app.use(express.json());
+
+// Middleware to log all requests
+app.use((req, res, next) => {
+  console.log(`${req.method} ${req.url}`);
+  next();
+});
 
 // Define a route
 app.use("/api/auth", authRouter);
