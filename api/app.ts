@@ -33,20 +33,21 @@ mongoose
 // Initialize Express
 const app = express();
 
-// Enable CORS
-app.use(
-  cors({
-    origin: "https://gut-to-know.vercel.app",
-    methods: ["GET", "POST", "PUT", "DELETE"],
-    allowedHeaders: ["Content-Type"],
-  })
-);
-
 // Parse URL-encoded bodies
 app.use(cookieParser());
 
 // Parse JSON bodies
 app.use(express.json());
+
+// Enable CORS
+app.use(
+  cors({
+    origin: "gut-to-know.vercel.app",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type"],
+    credentials: true,
+  })
+);
 
 // Middleware to log all requests
 app.use((req, res, next) => {
