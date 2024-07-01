@@ -37,10 +37,13 @@ const app = express();
 app.use(cookieParser());
 
 // Enable CORS
+// https://gut-to-know-game-backend.onrender.com is the backend URL
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "https://gut-to-know-game-backend.onrender.com",
     credentials: true,
+    allowedHeaders: ["Content-Type", "x_auth_token"],
+    exposedHeaders: ["x_auth_token"],
   })
 );
 
