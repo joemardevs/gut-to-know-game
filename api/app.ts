@@ -42,7 +42,7 @@ app.use(express.json());
 // Enable CORS
 app.use(
   cors({
-    origin: "gut-to-know.vercel.app",
+    origin: "https://gut-to-know.vercel.app",
     methods: ["GET", "POST", "PUT", "DELETE"],
     allowedHeaders: ["Content-Type"],
     credentials: true,
