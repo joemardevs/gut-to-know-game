@@ -12,11 +12,13 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, enabledLoading, disabledLoading] = useToggle(false);
   const [error, setError] = useState(null);
 
+  const BASE_URL = import.meta.env.VITE_BASE_URL;
+
   const handleSignIn = async formData => {
     enabledLoading();
 
     try {
-      const response = await fetch("/api/auth/signin", {
+      const response = await fetch(`${BASE_URL}/api/auth/signin`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -52,7 +54,7 @@ export const AuthProvider = ({ children }) => {
   const handleSignUp = async formData => {
     enabledLoading();
     try {
-      const response = await fetch("/api/auth/signup", {
+      const response = await fetch(`${BASE_URL}/api/auth/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
