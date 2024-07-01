@@ -1,10 +1,9 @@
 {
     "version": 2,
-    "rewrites": [{ "source": "/(.*)", "destination": "/" }],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "https://gut-to-know-game-backend.onrender.com/$1"
-      }
-    ]
+    "rewrites": [
+      { "source": "/(.*)", "destination": "/" },
+    {
+      "source": "/api/(.*)",
+      "destination": "https://gut-to-know-game-backend.onrender.com/$1"
+    }]
   }
