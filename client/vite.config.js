@@ -7,9 +7,10 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/api': {
-        target: 'https://gut-to-know-game-backend.onrender.com',
+        target: 'https://gut-to-know-game-backend.onrender.com/api',
         secure: false,
         changeOrigin: true,
+        rewrite: path => path.replace(/^\/api/, '')
       }
     },
   },
