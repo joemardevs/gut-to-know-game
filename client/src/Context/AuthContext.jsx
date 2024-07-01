@@ -12,20 +12,21 @@ export const AuthProvider = ({ children }) => {
   const [isLoading, enabledLoading, disabledLoading] = useToggle(false);
   const [error, setError] = useState(null);
 
-  const BASE_URL = import.meta.env.VITE_BASE_URL;
-
   const handleSignIn = async formData => {
     enabledLoading();
 
     try {
-      const response = await fetch(`${BASE_URL}/api/auth/signin`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-        credentials: "include",
-      });
+      const response = await fetch(
+        `https://gut-to-know-game-backend.onrender.com/api/auth/signin`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+          credentials: "include",
+        }
+      );
 
       const data = await response.json();
 
@@ -54,13 +55,16 @@ export const AuthProvider = ({ children }) => {
   const handleSignUp = async formData => {
     enabledLoading();
     try {
-      const response = await fetch(`${BASE_URL}/api/auth/signup`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        `https://gut-to-know-game-backend.onrender.com/api/auth/signup`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
