@@ -36,16 +36,15 @@ const app = express();
 // Parse URL-encoded bodies
 app.use(cookieParser());
 
+const corsOptions = {
+  origin: process.env.FRONTEND_URL || "http://localhost:5173",
+  credentials: true,
+};
+
 // Enable CORS
-// https://gut-to-know-game-backend.onrender.com is the backend URL
-app.use(
-  cors({
-    origin: "https://gut-to-know-game-backend.onrender.com",
-    credentials: true,
-    allowedHeaders: ["Content-Type", "x_auth_token"],
-    exposedHeaders: ["x_auth_token"],
-  })
-);
+app.use(cors(corsOptions));
+
+app.options("*", cors(corsOptions));
 
 // Parse JSON bodies
 app.use(express.json());
