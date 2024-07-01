@@ -37,7 +37,10 @@ const app = express();
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: "https://gut-to-know.vercel.app",
+  origin: [
+    "https://gut-to-know.onrender.com/",
+    "https://gut-to-know.vercel.app",
+  ],
   credentials: true,
 };
 
