@@ -37,7 +37,7 @@ const app = express();
 app.use(cookieParser());
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL || "http://localhost:8080",
+  origin: "https://gut-to-know.vercel.app",
   credentials: true,
 };
 
