@@ -7,9 +7,14 @@ export default defineConfig({
     port: 8080,
 
     proxy: {
-      '/api': "https://gut-to-know-game-backend.onrender.com"
+      '/api': {
+        target: 'https://gut-to-know-game-backend.onrender.com',
+        changeOrigin: true,
+        secure: false,
+      }
     },
   },
+
   build: {
     rollupOptions: {
       output: {
