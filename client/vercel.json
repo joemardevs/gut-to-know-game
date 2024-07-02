@@ -1,10 +1,6 @@
 {
     "version": 2,
     "rewrites": [
-      {
-        "source": "/api/(.*)",
-        "destination": "https://gut-to-know-game-backend.onrender.com"
-    },
       { "source": "/(.*)", "destination": "/" }],
       "headers": [
     {
