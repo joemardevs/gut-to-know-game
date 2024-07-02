@@ -11,7 +11,6 @@ export default defineConfig({
         target: 'https://gut-to-know-game-backend.onrender.com',
         changeOrigin: true,
         secure: false,
-        rewrite: path => path.replace(/^\/api/, '')
       }
     },
   },

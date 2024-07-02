@@ -3,7 +3,7 @@
     "rewrites": [
       {
         "source": "/api/(.*)",
-        "destination": "https://gut-to-know-game-backend.onrender.com/$1"
+        "destination": "https://gut-to-know-game-backend.onrender.com"
     },
       { "source": "/(.*)", "destination": "/" }],
       "headers": [
