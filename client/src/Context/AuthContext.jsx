@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const handleSignIn = async formData => {
+    console.log("Begin Sign In");
     enabledLoading();
 
     try {
@@ -46,6 +47,7 @@ export const AuthProvider = ({ children }) => {
       setError(error);
     } finally {
       disabledLoading();
+      console.log("End Sign In");
     }
   };
 

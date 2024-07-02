@@ -6,7 +6,7 @@
   "type": "commonjs",
   "scripts": {
     "dev": "npx tsx watch api/app.ts",
-    "start": "node dist/app.js"
+    "start": "tsc --watch && node dist/app.js"
   },
   "author": "joemardevs",
   "license": "ISC",
