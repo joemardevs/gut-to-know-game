@@ -33,12 +33,6 @@ mongoose
 // Initialize Express
 const app = express();
 
-// Parse URL-encoded bodies
-app.use(cookieParser());
-
-// Parse JSON bodies
-app.use(express.json());
-
 // Enable CORS
 app.use(
   cors({
@@ -55,9 +49,27 @@ app.use(
   })
 );
 
+// Parse URL-encoded bodies
+app.use(cookieParser());
+
+// Parse JSON bodies
+app.use(express.json());
+
 // Middleware to log all requests
 app.use((req, res, next) => {
   console.log(`${req.method} ${req.url}`);
+  next();
+});
+
+// Middleware to log CORS headers
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "https://gut-to-know.vercel.app");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept, Authorization"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  console.log("CORS headers set for https://gut-to-know.vercel.app");
   next();
 });
 
