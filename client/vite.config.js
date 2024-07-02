@@ -6,13 +6,13 @@ export default defineConfig({
   server: {
     port: 8080,
 
-    // proxy: {
-    //   '/api': {
-    //     target: 'https://gut-to-know-game-backend.onrender.com',
-    //     changeOrigin: true,
-    //     secure: true,
-    //   }
-    // },
+    proxy: {
+      '/api': {
+        target: 'https://gut-to-know-game-backend.onrender.com',
+        changeOrigin: true,
+        secure: true,
+      }
+    },
   },
 
   build: {
