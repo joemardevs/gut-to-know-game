@@ -1,11 +1,6 @@
 {
     "version": 2,
     "rewrites": [
-      { "source": "/(.*)", "destination": "/" },
-      {
-        "src": "/signin",
-        "destination": "https://gut-to-know-game-backend.onrender.com/api/auth/signin",
-        "methods": ["POST"]
-      }
+      { "source": "/(.*)", "destination": "/" }
     ]
   }
