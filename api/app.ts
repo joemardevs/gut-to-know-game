@@ -34,7 +34,12 @@ mongoose
 const app = express();
 
 // Enable CORS
-app.use(cors());
+app.use(
+  cors({
+    origin: ["https://gut-to-know.vercel.app", "http://localhost:8080"],
+    credentials: true,
+  })
+);
 
 // Parse URL-encoded bodies
 app.use(cookieParser());
