@@ -13,7 +13,6 @@ export const AuthProvider = ({ children }) => {
   const [error, setError] = useState(null);
 
   const handleSignIn = async formData => {
-    console.log("Begin Sign In");
     enabledLoading();
 
     try {
