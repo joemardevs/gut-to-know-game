@@ -41,6 +41,8 @@ const Question = () => {
         return setQuestionData(data.question);
       }
 
+      console.log("Question data: ", data.question);
+
       const shuffledChoices = data.question.choices.sort(
         () => Math.random() - 0.5
       );

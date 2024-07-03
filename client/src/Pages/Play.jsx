@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import MasterLayout from "../Layouts/MasterLayout";
 import { Box, Button, Flex, IconButton, Spacer } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
-import { FaQuestion, FaShareAlt } from "react-icons/fa";
+import { FaQuestion } from "react-icons/fa";
 import { IoIosArrowBack } from "react-icons/io";
 import Loading from "../Components/Loading";
 import useToggle from "../hooks/useToggle";
@@ -55,16 +55,6 @@ const Play = () => {
             colorScheme="orange"
             aria-label="FAQs"
             icon={<FaQuestion size="25px" color="white" />}
-            size="lg"
-          />
-        </Flex>
-        <Flex marginTop="10px">
-          <Spacer />
-          <IconButton
-            isRound
-            colorScheme="orange"
-            aria-label="Authors"
-            icon={<FaShareAlt size="25px" color="white" />}
             size="lg"
           />
         </Flex>

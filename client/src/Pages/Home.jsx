@@ -8,14 +8,7 @@ import {
   useToast,
 } from "@chakra-ui/react";
 import MasterLayout from "../Layouts/MasterLayout";
-import {
-  FaPlay,
-  FaQuestion,
-  FaShareAlt,
-  FaTrophy,
-  FaUser,
-  FaUsers,
-} from "react-icons/fa";
+import { FaPlay, FaQuestion, FaTrophy, FaUser, FaUsers } from "react-icons/fa";
 import { TbLogout } from "react-icons/tb";
 import { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
@@ -88,16 +81,6 @@ export const Home = () => {
             colorScheme="orange"
             aria-label="FAQs"
             icon={<FaQuestion size="25px" color="white" />}
-            size="lg"
-          />
-        </Flex>
-        <Flex marginTop="10px">
-          <Spacer />
-          <IconButton
-            isRound
-            colorScheme="orange"
-            aria-label="Authors"
-            icon={<FaShareAlt size="25px" color="white" />}
             size="lg"
           />
         </Flex>
