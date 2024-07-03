@@ -11,7 +11,7 @@ const AboutTheGame = () => {
   }, []);
   return (
     <MasterLayout
-      containerStyle={{
+      wrapperStyle={{
         backgroundImage: "url('/assets/levels_bg.png')",
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",

@@ -73,6 +73,10 @@ const Competitions = () => {
     <MasterLayout
       wrapperStyle={{
         position: "relative",
+        backgroundImage: "url('/assets/levels_bg.png')",
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
       }}>
       <IconButton
         onClick={() => navigate(-1)}
@@ -87,7 +91,7 @@ const Competitions = () => {
       />
       <Box>
         <Text
-          color="#FFF"
+          color="#000"
           fontSize="1.5em"
           fontWeight="bold"
           mt="4rem"
@@ -98,7 +102,7 @@ const Competitions = () => {
 
         <TableContainer>
           <Table variant="simple">
-            <TableCaption color="white">
+            <TableCaption color="black">
               Here are the top users in the competition
             </TableCaption>
             <Thead bg="orange.500">
@@ -115,16 +119,16 @@ const Competitions = () => {
                     bg={
                       topUser.user._id === user._id ? "green" : "transparent"
                     }>
-                    <Td color="white">
+                    <Td color="black">
                       {topUser.user.username}
                       {topUser.user._id === user._id && " (You)"}
                     </Td>
-                    <Td color="white">{topUser.trophy}</Td>
+                    <Td color="black">{topUser.trophy}</Td>
                   </Tr>
                 ))
               ) : (
                 <Tr>
-                  <Td colSpan="2" textAlign="center" color="white">
+                  <Td colSpan="2" textAlign="center" color="black">
                     No users found
                   </Td>
                 </Tr>
@@ -144,7 +148,7 @@ const Competitions = () => {
               colorScheme="gray">
               Previous
             </Button>
-            <Text color="white" fontSize=".85rem">
+            <Text color="black" fontSize=".85rem">
               Page {page} of {totalPages}
             </Text>
             <Button
