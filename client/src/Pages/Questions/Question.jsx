@@ -33,11 +33,14 @@ const Question = () => {
   const fetchQuestion = async () => {
     try {
       if (!user?.token) return;
-      const response = await fetch(`/api/question/get-question/${id}`, {
-        headers: {
-          x_auth_token: user?.token,
-        },
-      });
+      const response = await fetch(
+        `https://gut-to-know-game-backend.onrender.com/api/question/get-question/${id}`,
+        {
+          headers: {
+            x_auth_token: user?.token,
+          },
+        }
+      );
       const data = await response.json();
 
       if (!data?.success) {
@@ -64,14 +67,17 @@ const Question = () => {
     console.log("Question answered");
 
     try {
-      const response = await fetch(`/api/question/answered/${id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          x_auth_token: user?.token,
-        },
-        body: JSON.stringify({ isQuestionAnsweredCorrect }),
-      });
+      const response = await fetch(
+        `https://gut-to-know-game-backend.onrender.com/api/question/answered/${id}`,
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            x_auth_token: user?.token,
+          },
+          body: JSON.stringify({ isQuestionAnsweredCorrect }),
+        }
+      );
       const data = await response.json();
 
       if (!data?.success) {
@@ -117,17 +123,20 @@ const Question = () => {
     try {
       if (!user?.token) return;
 
-      const reponse = await fetch("/api/trophy/increment-trophy", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          x_auth_token: user?.token,
-        },
-        body: JSON.stringify({
-          user_id: user?._id,
-          trophy_value: questionData?.trophy,
-        }),
-      });
+      const reponse = await fetch(
+        "https://gut-to-know-game-backend.onrender.com/api/trophy/increment-trophy",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            x_auth_token: user?.token,
+          },
+          body: JSON.stringify({
+            user_id: user?._id,
+            trophy_value: questionData?.trophy,
+          }),
+        }
+      );
 
       const data = await reponse.json();
 

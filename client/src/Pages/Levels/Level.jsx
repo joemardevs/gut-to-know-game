@@ -40,16 +40,22 @@ const Level = () => {
       if (!user?.token) return;
 
       const [levelRes, questionsRes] = await Promise.all([
-        fetch(`/api/level/${level}`, {
-          headers: {
-            x_auth_token: user?.token,
-          },
-        }),
-        fetch(`/api/question/level/${level}`, {
-          headers: {
-            x_auth_token: user?.token,
-          },
-        }),
+        fetch(
+          `https://gut-to-know-game-backend.onrender.com/api/level/${level}`,
+          {
+            headers: {
+              x_auth_token: user?.token,
+            },
+          }
+        ),
+        fetch(
+          `https://gut-to-know-game-backend.onrender.com/api/question/level/${level}`,
+          {
+            headers: {
+              x_auth_token: user?.token,
+            },
+          }
+        ),
       ]);
 
       const [levelData, questionsData] = await Promise.all([

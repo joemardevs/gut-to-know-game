@@ -32,11 +32,14 @@ const Competitions = () => {
     try {
       if (!user?.token) return;
 
-      const response = await fetch(`/api/trophy?page=${page}&limit=${limit}`, {
-        headers: {
-          x_auth_token: user?.token,
-        },
-      });
+      const response = await fetch(
+        `https://gut-to-know-game-backend.onrender.com/api/trophy?page=${page}&limit=${limit}`,
+        {
+          headers: {
+            x_auth_token: user?.token,
+          },
+        }
+      );
 
       const { data, success } = await response.json();
 
