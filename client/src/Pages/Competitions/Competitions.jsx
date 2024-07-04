@@ -12,6 +12,7 @@ import {
   Td,
   ButtonGroup,
   Button,
+  Image,
 } from "@chakra-ui/react";
 import MasterLayout from "../../Layouts/MasterLayout";
 import { IoIosArrowBack } from "react-icons/io";
@@ -119,11 +120,23 @@ const Competitions = () => {
                     bg={
                       topUser.user._id === user._id ? "green" : "transparent"
                     }>
-                    <Td color="black">
+                    <Td
+                      color={topUser.user._id === user._id ? "white" : "black"}>
                       {topUser.user.username}
                       {topUser.user._id === user._id && " (You)"}
                     </Td>
-                    <Td color="black">{topUser.trophy}</Td>
+                    <Td
+                      color={topUser.user._id === user._id ? "white" : "black"}
+                      display="flex"
+                      flexDirection="row"
+                      alignItems="center">
+                      {topUser.trophy}
+                      <Image
+                        src="/assets/trophy.png"
+                        alt={topUser.user.username}
+                        w="30px"
+                      />
+                    </Td>
                   </Tr>
                 ))
               ) : (
