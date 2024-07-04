@@ -4,7 +4,14 @@ import {
   Grid,
   IconButton,
   Img,
+  Modal,
+  ModalBody,
+  ModalCloseButton,
+  ModalContent,
+  ModalHeader,
+  ModalOverlay,
   Text,
+  useDisclosure,
   useToast,
 } from "@chakra-ui/react";
 import MasterLayout from "../../Layouts/MasterLayout";
@@ -21,6 +28,7 @@ const Question = () => {
   const { user } = useAuth();
   const [questionData, setQuestionData] = useState(null);
   const [isAnswered, enabledAnswer] = useToggle(null);
+  const { isOpen, onOpen, onClose } = useDisclosure();
 
   const fetchQuestion = async () => {
     try {
@@ -189,19 +197,49 @@ const Question = () => {
               whiteSpace="normal"
               overflow="hidden"
               textAlign="center"
-              width="100%"
-              height="auto"
+              h="8rem"
+              w="11rem"
               padding=".5rem">
               {choice?.label}
             </Button>
           ))}
         </Grid>
       </Flex>
+
       {isAnswered && (
-        <Text color="white" fontSize=".85em" textAlign="center">
-          {questionData.additional_information}
-        </Text>
+        <Button
+          colorScheme="orange"
+          onClick={onOpen}
+          position="absolute"
+          bottom="1rem"
+          right="1rem"
+          size="sm"
+          zIndex="1">
+          Additional Information
+        </Button>
       )}
+
+      <Modal
+        isOpen={isOpen}
+        onClose={onClose}
+        isCentered
+        size="sm"
+        motionPreset="slideInBottom">
+        <ModalOverlay />
+        <ModalContent>
+          <ModalHeader>Additional Information</ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            <Text
+              color="black"
+              fontSize=".85em"
+              textAlign="justify"
+              textIndent="2rem">
+              {questionData?.additional_information}
+            </Text>
+          </ModalBody>
+        </ModalContent>
+      </Modal>
     </MasterLayout>
   );
 };
