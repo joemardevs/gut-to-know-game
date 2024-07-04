@@ -3,7 +3,10 @@ import MasterLayout from "../Layouts/MasterLayout";
 
 const Loading = () => {
   return (
-    <MasterLayout>
+    <MasterLayout
+      wrapperStyle={{
+        backgroundColor: "#1A2421",
+      }}>
       <Box
         display="flex"
         justifyContent="center"

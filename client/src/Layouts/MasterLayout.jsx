@@ -36,7 +36,6 @@ const MasterLayout = ({ children, wrapperStyle, containerStyle }) => {
               base: "none",
               md: "1px solid white",
             }}
-            bg="#1A2421"
             {...wrapperStyle}>
             {children}
           </Box>

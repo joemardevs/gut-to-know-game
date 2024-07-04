@@ -30,7 +30,10 @@ const SignIn = () => {
   const [isPasswordVisible, , , togglePassword] = useToggle();
 
   return (
-    <MasterLayout>
+    <MasterLayout
+      wrapperStyle={{
+        backgroundColor: "#1A2421",
+      }}>
       <Box
         mt={{
           base: "200px",

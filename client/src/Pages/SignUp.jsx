@@ -28,7 +28,10 @@ const SignUp = () => {
   } = useSignUp();
 
   return (
-    <MasterLayout>
+    <MasterLayout
+      wrapperStyle={{
+        backgroundColor: "#1A2421",
+      }}>
       <Box
         mt={{
           base: "20px",
