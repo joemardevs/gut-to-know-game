@@ -53,17 +53,24 @@ const AboutTheGame = () => {
           game, players will explore the organs of the digestive system, their
           interactions with organs from the respiratory, circulatory, and
           excretory systems, and the changes food undergoes during physical and
-          chemical digestion. Additionally, the game covers diseases resulting
-          from nutrient deficiencies and the ingestion of harmful substances,
-          along with their prevention, detection, and treatment methods while
-          encouraging the practical application of knowledge. To enhance
-          engagement, Gut To Know features a leaderboard for players to compete
-          with friends and fellow learners, earning points and climbing to the
-          top. For those eager to delve deeper, answering the provided questions
-          will unlock additional information, encouraging further engagement and
-          knowledge expansion. Embark on this exciting educational journey with
-          Gut To Know and unpack the mysteries of the digestive system in a fun
-          and interactive way!
+          chemical digestion.
+        </Text>
+        <Text
+          color="black"
+          fontSize=".9em"
+          textAlign="justify"
+          textIndent="2em">
+          Additionally, the game covers diseases resulting from nutrient
+          deficiencies and the ingestion of harmful substances, along with their
+          prevention, detection, and treatment methods while encouraging the
+          practical application of knowledge. To enhance engagement, Gut To Know
+          features a leaderboard for players to compete with friends and fellow
+          learners, earning points and climbing to the top. For those eager to
+          delve deeper, answering the provided questions will unlock additional
+          information, encouraging further engagement and knowledge expansion.
+          Embark on this exciting educational journey with Gut To Know and
+          unpack the mysteries of the digestive system in a fun and interactive
+          way!
         </Text>
       </Box>
     </MasterLayout>

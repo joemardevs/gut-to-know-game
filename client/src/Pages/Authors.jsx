@@ -70,16 +70,23 @@ const Authors = () => {
           integrating technology into the assessment process and catering to the
           learning styles of digital natives. The team recognizes the importance
           of integrating technology to engage students effectively and
-          facilitate their learning experiences. By integrating technology,
-          particularly gamification, they seek to create dynamic and interactive
-          assessment methods that empower students to take ownership of their
-          learning journey and bring another side of perspective ensuring that
-          every learner has an opportunity to succeed. Through their
-          collaborative efforts, the team aims to not only improve
-          students&apos; perceptions of formative assessment but also to inspire
-          fellow educators to embrace innovative teaching practices. By sharing
-          their insights and experiences, they hope to contribute to the ongoing
-          transformation of educational practices in this digital age.
+          facilitate their learning experiences.
+        </Text>
+        <Text
+          color="black"
+          fontSize=".9em"
+          textAlign="justify"
+          textIndent="2em">
+          By integrating technology, particularly gamification, they seek to
+          create dynamic and interactive assessment methods that empower
+          students to take ownership of their learning journey and bring another
+          side of perspective ensuring that every learner has an opportunity to
+          succeed. Through their collaborative efforts, the team aims to not
+          only improve students&apos; perceptions of formative assessment but
+          also to inspire fellow educators to embrace innovative teaching
+          practices. By sharing their insights and experiences, they hope to
+          contribute to the ongoing transformation of educational practices in
+          this digital age.
         </Text>
       </Box>
     </MasterLayout>
