@@ -57,13 +57,16 @@ export const AuthProvider = ({ children }) => {
   const handleSignUp = async formData => {
     enabledLoading();
     try {
-      const response = await fetch("/api/auth/signup", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const response = await fetch(
+        "https://gut-to-know-game-backend.onrender.com/api/auth/signup",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(formData),
+        }
+      );
 
       const data = await response.json();
 
@@ -84,13 +87,16 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignOut = async () => {
     enabledLoading();
-    const response = await fetch("/api/auth/signout", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        x_auth_token: user?.token,
-      },
-    });
+    const response = await fetch(
+      "https://gut-to-know-game-backend.onrender.com/api/auth/signout",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          x_auth_token: user?.token,
+        },
+      }
+    );
 
     const data = await response.json();
 
