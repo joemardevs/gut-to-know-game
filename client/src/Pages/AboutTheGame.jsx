@@ -59,7 +59,8 @@ const AboutTheGame = () => {
           color="black"
           fontSize=".9em"
           textAlign="justify"
-          textIndent="2em">
+          textIndent="2em"
+          mt="1rem">
           Additionally, the game covers diseases resulting from nutrient
           deficiencies and the ingestion of harmful substances, along with their
           prevention, detection, and treatment methods while encouraging the

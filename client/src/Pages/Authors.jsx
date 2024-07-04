@@ -76,7 +76,8 @@ const Authors = () => {
           color="black"
           fontSize=".9em"
           textAlign="justify"
-          textIndent="2em">
+          textIndent="2em"
+          mt="1rem">
           By integrating technology, particularly gamification, they seek to
           create dynamic and interactive assessment methods that empower
           students to take ownership of their learning journey and bring another
