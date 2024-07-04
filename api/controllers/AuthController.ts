@@ -90,7 +90,7 @@ const signin = async (req: Request, res: Response, next: NextFunction) => {
 
 const signout = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { x_auth_token } = req.cookies;
+    const { x_auth_token } = req.headers as { x_auth_token: string };
 
     if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 

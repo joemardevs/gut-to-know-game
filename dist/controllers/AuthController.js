@@ -87,7 +87,7 @@ const signin = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
 });
 const signout = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { x_auth_token } = req.cookies;
+        const { x_auth_token } = req.headers;
         if (!x_auth_token)
             return next((0, index_js_2.errorHandler)(401, "User not authenticated"));
         // Clear the cookie
