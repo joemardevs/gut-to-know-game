@@ -55,10 +55,7 @@ app.use((req, res, next) => {
 
 // Middleware to log CORS headers
 app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", [
-    "https://gut-to-know.vercel.app",
-    "http://localhost:8080",
-  ]);
+  res.header("Access-Control-Allow-Origin", "https://gut-to-know.vercel.app");
   res.header(
     "Access-Control-Allow-Headers",
     "Origin, X-Requested-With, Content-Type, Accept, Authorization"
