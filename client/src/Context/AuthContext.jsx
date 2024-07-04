@@ -17,17 +17,14 @@ export const AuthProvider = ({ children }) => {
     enabledLoading();
 
     try {
-      const response = await fetch(
-        "https://gut-to-know-game-backend.onrender.com/api/auth/signin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-          credentials: "include",
-        }
-      );
+      const response = await fetch("/api/auth/signin", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+        credentials: "include",
+      });
 
       const data = await response.json();
 
