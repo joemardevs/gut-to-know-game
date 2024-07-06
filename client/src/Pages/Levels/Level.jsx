@@ -68,12 +68,26 @@ const Level = () => {
       }
 
       setLevelData(levelData);
-      const shuffledQuestions = shuffleArray(questionsData.questions)
+      // Separate the questions based on whether they are answered or not
+      const answeredQuestions = questionsData.questions.filter(
+        q => q.isAnswered === true
+      );
+      const unansweredQuestions = questionsData.questions.filter(
+        q => q.isAnswered === false
+      );
+
+      // Shuffle the unanswered questions
+      const shuffledUnansweredQuestions = shuffleArray(unansweredQuestions);
+
+      // Combine the shuffled unanswered questions with the answered questions and sort them based on whether they are answered or not and then reverse the order
+      const combinedQuestions = [
+        ...shuffledUnansweredQuestions,
+        ...answeredQuestions,
+      ]
         .sort((a, b) => a.isAnswered - b.isAnswered)
         .reverse();
 
-      setQuestions(shuffledQuestions);
-      // setQuestions(questionsData.questions);
+      setQuestions(combinedQuestions);
     } catch (error) {
       console.log("Error fetching questions: ", error.message);
       setError(error);

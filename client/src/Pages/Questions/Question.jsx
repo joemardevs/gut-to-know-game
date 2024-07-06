@@ -208,7 +208,8 @@ const Question = () => {
               textAlign="center"
               h="8rem"
               w="11rem"
-              padding=".5rem">
+              padding=".5rem"
+              fontSize={choice.label.length > 48 ? ".75rem" : "1rem"}>
               {choice?.label}
             </Button>
           ))}

@@ -116,8 +116,8 @@ const Competitions = () => {
               </Tr>
             </Thead>
             <Tbody>
-              {topUsers?.length > 0 ? (
-                topUsers?.map(topUser => (
+              {topUsers.length > 0 ? (
+                topUsers.map(topUser => (
                   <Tr
                     key={topUser._id}
                     bg={
