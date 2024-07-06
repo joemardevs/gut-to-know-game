@@ -16,7 +16,7 @@ const ChoiceSchema = new Schema({
   },
 });
 
-const QuestionSchema = new Schema({
+export const QuestionSchema = new Schema({
   level: {
     type: Number,
     required: true,

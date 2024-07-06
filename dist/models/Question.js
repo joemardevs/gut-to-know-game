@@ -3,6 +3,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
+exports.QuestionSchema = void 0;
 const mongoose_1 = __importDefault(require("mongoose"));
 const Schema = mongoose_1.default.Schema;
 const ChoiceSchema = new Schema({
@@ -19,7 +20,7 @@ const ChoiceSchema = new Schema({
         required: true,
     },
 });
-const QuestionSchema = new Schema({
+exports.QuestionSchema = new Schema({
     level: {
         type: Number,
         required: true,
@@ -51,5 +52,5 @@ const QuestionSchema = new Schema({
         required: true,
     },
 });
-const Question = mongoose_1.default.model("Question", QuestionSchema, "questions");
+const Question = mongoose_1.default.model("Question", exports.QuestionSchema, "questions");
 exports.default = Question;

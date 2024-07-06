@@ -23,11 +23,14 @@ const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* (
     try {
         const { username, email, name, password } = req.body;
         const hashedPassword = bcryptjs_1.default.hashSync(password, 10);
+        // Fetch all questions
+        const allQuestions = yield index_js_1.Question.find();
         const newUser = new index_js_1.User({
             username,
             email,
             name,
             password: hashedPassword,
+            questions: allQuestions,
         });
         const userExists = yield index_js_1.User.findOne({ $or: [{ username }, { email }] });
         if (userExists)

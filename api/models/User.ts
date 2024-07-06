@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { QuestionSchema } from "./Question";
 
 const userSchema = new mongoose.Schema(
   {
@@ -20,6 +21,7 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    questions: [QuestionSchema],
   },
   {
     timestamps: true,

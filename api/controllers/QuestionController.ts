@@ -1,6 +1,7 @@
-import { Question } from "../models/index.js";
+import { Question, User } from "../models/index.js";
 import { errorHandler } from "../utils/index.js";
 import { NextFunction, Request, Response } from "express";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const getQuestions = async (
   req: Request,
@@ -10,12 +11,27 @@ const getQuestions = async (
   try {
     //get params
     const { level } = req.params;
+    const { x_auth_token } = req.headers;
 
-    const questions = await Question.find({ level });
+    if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
+
+    const tokenDecoded = jwt.verify(
+      x_auth_token as string,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
+
+    const user = await User.findById(tokenDecoded._id);
+
+    if (!user) return next(errorHandler(404, "User not found"));
+
+    const filteredQuestions = user.questions.filter(
+      question => question.level === parseInt(level)
+    );
+
     res.status(200).send({
       success: true,
       message: "Questions found",
-      questions,
+      questions: filteredQuestions,
     });
   } catch (error: any) {
     next(errorHandler(500, error.message));
@@ -25,10 +41,20 @@ const getQuestions = async (
 const getQuestion = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const { id } = req.params;
+    const { x_auth_token } = req.headers;
 
-    const question = await Question.findById(id);
+    if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 
-    if (!question) return next(errorHandler(404, "Question not found"));
+    const tokenDecoded = jwt.verify(
+      x_auth_token as string,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
+
+    const user = await User.findById(tokenDecoded._id);
+
+    if (!user) return next(errorHandler(404, "User not found"));
+
+    const question = user.questions.id(id);
 
     res.status(200).send({
       success: true,
@@ -48,19 +74,34 @@ const questionAnswered = async (
   try {
     const { id } = req.params;
     const { isQuestionAnsweredCorrect } = req.body;
+    const { x_auth_token } = req.headers;
 
-    const question = await Question.findById(id);
+    if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
+
+    const tokenDecoded = jwt.verify(
+      x_auth_token as string,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
+
+    const user = await User.findById(tokenDecoded._id);
+
+    if (!user) return next(errorHandler(404, "User not found"));
+
+    //find the question in the user's questions array
+    const question = user.questions.id(id);
 
     if (!question) return next(errorHandler(404, "Question not found"));
 
     question.isAnswered = true;
     question.isQuestionAnsweredCorrect = isQuestionAnsweredCorrect;
-    await question.save();
+
+    await user.save();
 
     res.status(200).send({
       success: true,
       message: "Question answered",
       question,
+      user,
     });
   } catch (error: any) {
     next(errorHandler(500, error.message));

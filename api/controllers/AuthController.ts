@@ -1,4 +1,4 @@
-import { User } from "../models/index.js";
+import { Question, User } from "../models/index.js";
 import bcrypt from "bcryptjs";
 import { errorHandler } from "../utils/index.js";
 import jwt, { JwtPayload } from "jsonwebtoken";
@@ -14,11 +14,15 @@ const signup = async (req: Request, res: Response, next: NextFunction) => {
 
     const hashedPassword = bcrypt.hashSync(password, 10);
 
+    // Fetch all questions
+    const allQuestions = await Question.find();
+
     const newUser = new User({
       username,
       email,
       name,
       password: hashedPassword,
+      questions: allQuestions,
     });
 
     const userExists = await User.findOne({ $or: [{ username }, { email }] });
