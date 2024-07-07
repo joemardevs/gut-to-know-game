@@ -51,6 +51,10 @@ exports.QuestionSchema = new Schema({
         type: String,
         required: true,
     },
+    source: {
+        type: String,
+        required: true,
+    },
 });
 const Question = mongoose_1.default.model("Question", exports.QuestionSchema, "questions");
 exports.default = Question;

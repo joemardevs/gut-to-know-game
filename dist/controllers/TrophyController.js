@@ -13,24 +13,29 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils");
-const models_1 = require("../models");
 const Trophy_1 = __importDefault(require("../models/Trophy"));
+const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const incrementTrophyForUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { user_id, trophy_value } = req.body;
-        const user = yield models_1.User.findById(user_id);
-        if (!user)
-            return next((0, utils_1.errorHandler)(404, "User not found"));
-        let trophy = yield Trophy_1.default.findOne({ user: user });
+        const { trophy_value } = req.body;
+        const { x_auth_token } = req.headers;
+        if (!x_auth_token)
+            return next((0, utils_1.errorHandler)(401, "User not authenticated"));
+        const tokenDecoded = jsonwebtoken_1.default.verify(x_auth_token, process.env.JWT_SECRET);
+        const trophy = yield Trophy_1.default.findOne({ user: tokenDecoded._id });
         if (!trophy) {
-            trophy = new Trophy_1.default({
-                user: user,
+            const newTrophy = new Trophy_1.default({
+                user: tokenDecoded._id,
                 trophy: trophy_value,
             });
+            yield newTrophy.save();
+            return res.status(201).send({
+                success: true,
+                message: "Trophy updated",
+                trophy: newTrophy,
+            });
         }
-        else {
-            trophy.trophy += trophy_value;
-        }
+        trophy.trophy += trophy_value;
         yield trophy.save();
         res.status(200).send({
             success: true,

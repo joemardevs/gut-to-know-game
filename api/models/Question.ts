@@ -47,6 +47,10 @@ export const QuestionSchema = new Schema({
     type: String,
     required: true,
   },
+  source: {
+    type: String,
+    required: true,
+  },
 });
 
 const Question = mongoose.model("Question", QuestionSchema, "questions");

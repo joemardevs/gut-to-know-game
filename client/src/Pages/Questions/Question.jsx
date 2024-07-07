@@ -52,8 +52,6 @@ const Question = () => {
         return setQuestionData(data.question);
       }
 
-      console.log("Question data: ", data.question);
-
       const shuffledChoices = data.question.choices.sort(
         () => Math.random() - 0.5
       );
@@ -246,6 +244,17 @@ const Question = () => {
               textAlign="justify"
               textIndent="2rem">
               {questionData?.additional_information}
+            </Text>
+            <Text color="black" fontSize=".85em" textAlign="justify" mt="1rem">
+              Source :{" "}
+              <a
+                href={questionData?.source}
+                target="_blank"
+                style={{
+                  textDecoration: "underline",
+                }}>
+                {questionData?.source}
+              </a>
             </Text>
           </ModalBody>
         </ModalContent>
