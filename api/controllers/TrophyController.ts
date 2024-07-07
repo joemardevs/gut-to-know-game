@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { errorHandler } from "../utils";
-import { User } from "../models";
 import Trophy from "../models/Trophy";
+import jwt, { JwtPayload } from "jsonwebtoken";
 
 const incrementTrophyForUser = async (
   req: Request,
@@ -9,22 +9,34 @@ const incrementTrophyForUser = async (
   next: NextFunction
 ) => {
   try {
-    const { user_id, trophy_value } = req.body;
+    const { trophy_value } = req.body;
+    const { x_auth_token } = req.headers;
 
-    const user = await User.findById(user_id);
+    if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 
-    if (!user) return next(errorHandler(404, "User not found"));
+    const tokenDecoded = jwt.verify(
+      x_auth_token as string,
+      process.env.JWT_SECRET as string
+    ) as JwtPayload;
 
-    let trophy = await Trophy.findOne({ user: user });
+    const trophy = await Trophy.findOne({ user: tokenDecoded._id });
 
     if (!trophy) {
-      trophy = new Trophy({
-        user: user,
+      const newTrophy = new Trophy({
+        user: tokenDecoded._id,
         trophy: trophy_value,
       });
-    } else {
-      trophy.trophy += trophy_value;
+
+      await newTrophy.save();
+
+      return res.status(201).send({
+        success: true,
+        message: "Trophy updated",
+        trophy: newTrophy,
+      });
     }
+
+    trophy.trophy += trophy_value;
 
     await trophy.save();
 
