@@ -23,6 +23,7 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import useToggle from "../../hooks/useToggle";
 import Loading from "../../Components/Loading";
 import { useAuth } from "../../Context/AuthContext";
+import { BACKEND_URL } from "../../config";
 
 const Level = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -40,22 +41,16 @@ const Level = () => {
       if (!user?.token) return;
 
       const [levelRes, questionsRes] = await Promise.all([
-        fetch(
-          `https://gut-to-know-game-backend.onrender.com/api/level/${level}`,
-          {
-            headers: {
-              x_auth_token: user?.token,
-            },
-          }
-        ),
-        fetch(
-          `https://gut-to-know-game-backend.onrender.com/api/question/level/${level}`,
-          {
-            headers: {
-              x_auth_token: user?.token,
-            },
-          }
-        ),
+        fetch(`${BACKEND_URL}/api/level/${level}`, {
+          headers: {
+            x_auth_token: user?.token,
+          },
+        }),
+        fetch(`${BACKEND_URL}/api/question/level/${level}`, {
+          headers: {
+            x_auth_token: user?.token,
+          },
+        }),
       ]);
 
       const [levelData, questionsData] = await Promise.all([

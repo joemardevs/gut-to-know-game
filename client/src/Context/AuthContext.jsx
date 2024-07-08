@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
 import useToggle from "../hooks/useToggle";
 import { jwtDecode } from "jwt-decode";
+import { BACKEND_URL } from "../config";
 
 export const AuthContext = createContext();
 
@@ -17,17 +18,14 @@ export const AuthProvider = ({ children }) => {
     enabledLoading();
 
     try {
-      const response = await fetch(
-        "https://gut-to-know-game-backend.onrender.com/api/auth/signin",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${BACKEND_URL}/api/auth/signin`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+        credentials: "include",
+      });
 
       const data = await response.json();
 
@@ -57,16 +55,13 @@ export const AuthProvider = ({ children }) => {
   const handleSignUp = async formData => {
     enabledLoading();
     try {
-      const response = await fetch(
-        "https://gut-to-know-game-backend.onrender.com/api/auth/signup",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify(formData),
-        }
-      );
+      const response = await fetch(`${BACKEND_URL}/api/auth/signup`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
 
       const data = await response.json();
 
@@ -87,16 +82,13 @@ export const AuthProvider = ({ children }) => {
 
   const handleSignOut = async () => {
     enabledLoading();
-    const response = await fetch(
-      "https://gut-to-know-game-backend.onrender.com/api/auth/signout",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          x_auth_token: user?.token,
-        },
-      }
-    );
+    const response = await fetch(`${BACKEND_URL}/api/auth/signout`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        x_auth_token: user?.token,
+      },
+    });
 
     const data = await response.json();
 

@@ -19,6 +19,7 @@ import { IoIosArrowBack } from "react-icons/io";
 import { useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { useAuth } from "../../Context/AuthContext";
+import { BACKEND_URL } from "../../config";
 
 const Competitions = () => {
   const navigate = useNavigate();
@@ -33,7 +34,7 @@ const Competitions = () => {
       if (!user?.token) return;
 
       const response = await fetch(
-        `https://gut-to-know-game-backend.onrender.com/api/trophy?page=${page}&limit=${limit}`,
+        `${BACKEND_URL}/api/trophy?page=${page}&limit=${limit}`,
         {
           headers: {
             x_auth_token: user?.token,

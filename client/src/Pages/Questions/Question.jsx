@@ -20,6 +20,7 @@ import { useAuth } from "../../Context/AuthContext";
 import { useEffect, useState } from "react";
 import useToggle from "../../hooks/useToggle";
 import { IoIosArrowBack } from "react-icons/io";
+import { BACKEND_URL } from "../../config";
 
 const Question = () => {
   const { id } = useParams();
@@ -34,7 +35,7 @@ const Question = () => {
     try {
       if (!user?.token) return;
       const response = await fetch(
-        `https://gut-to-know-game-backend.onrender.com/api/question/get-question/${id}`,
+        `${BACKEND_URL}/api/question/get-question/${id}`,
         {
           headers: {
             x_auth_token: user?.token,
@@ -66,7 +67,7 @@ const Question = () => {
 
     try {
       const response = await fetch(
-        `https://gut-to-know-game-backend.onrender.com/api/question/answered/${id}`,
+        `${BACKEND_URL}/api/question/answered/${id}`,
         {
           method: "POST",
           headers: {
@@ -122,7 +123,7 @@ const Question = () => {
       if (!user?.token) return;
 
       const reponse = await fetch(
-        "https://gut-to-know-game-backend.onrender.com/api/trophy/increment-trophy",
+        "${BACKEND_URL}/api/trophy/increment-trophy",
         {
           method: "POST",
           headers: {
