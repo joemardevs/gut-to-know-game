@@ -8,13 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.authMiddleware = void 0;
 const index_js_1 = require("../utils/index.js");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const token_js_1 = require("../utils/token.js");
 const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { x_auth_token } = req.headers;
@@ -23,7 +20,7 @@ const authMiddleware = (req, res, next) => __awaiter(void 0, void 0, void 0, fun
         if (!process.env.JWT_SECRET)
             return next((0, index_js_1.errorHandler)(500, "JWT secret not defined"));
         // Verify token
-        const decoded = jsonwebtoken_1.default.verify(x_auth_token, process.env.JWT_SECRET);
+        const decoded = (0, token_js_1.getTokenDecoded)(x_auth_token);
         req.user = decoded;
         next();
     }

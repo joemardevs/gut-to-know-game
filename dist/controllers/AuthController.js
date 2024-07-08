@@ -17,6 +17,7 @@ const bcryptjs_1 = __importDefault(require("bcryptjs"));
 const index_js_2 = require("../utils/index.js");
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
 const dotenv_1 = __importDefault(require("dotenv"));
+const token_js_1 = require("../utils/token.js");
 // Load environment variables
 dotenv_1.default.config();
 const signup = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
@@ -105,13 +106,13 @@ const signout = (req, res, next) => __awaiter(void 0, void 0, void 0, function* 
 });
 const profile = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { x_auth_token } = req.cookies;
+        const { x_auth_token } = req.headers;
         if (!x_auth_token)
             return next((0, index_js_2.errorHandler)(401, "User not authenticated"));
         if (!process.env.JWT_SECRET)
             return next((0, index_js_2.errorHandler)(500, "JWT secret not defined"));
-        const decoded = jsonwebtoken_1.default.verify(x_auth_token, process.env.JWT_SECRET);
-        const user = yield index_js_1.User.findById(decoded._id);
+        const tokenDecoded = (0, token_js_1.getTokenDecoded)(x_auth_token);
+        const user = yield index_js_1.User.findById(tokenDecoded._id);
         if (!user)
             return next((0, index_js_2.errorHandler)(404, "User not found"));
         res.status(200).send({

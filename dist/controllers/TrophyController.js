@@ -14,14 +14,14 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const utils_1 = require("../utils");
 const Trophy_1 = __importDefault(require("../models/Trophy"));
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const token_1 = require("../utils/token");
 const incrementTrophyForUser = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { trophy_value } = req.body;
         const { x_auth_token } = req.headers;
         if (!x_auth_token)
             return next((0, utils_1.errorHandler)(401, "User not authenticated"));
-        const tokenDecoded = jsonwebtoken_1.default.verify(x_auth_token, process.env.JWT_SECRET);
+        const tokenDecoded = (0, token_1.getTokenDecoded)(x_auth_token);
         const trophy = yield Trophy_1.default.findOne({ user: tokenDecoded._id });
         if (!trophy) {
             const newTrophy = new Trophy_1.default({

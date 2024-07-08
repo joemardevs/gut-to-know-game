@@ -4,6 +4,7 @@ import { errorHandler } from "../utils/index.js";
 import jwt, { JwtPayload } from "jsonwebtoken";
 import dotenv from "dotenv";
 import { NextFunction, Request, Response } from "express";
+import { getTokenDecoded } from "../utils/token.js";
 
 // Load environment variables
 dotenv.config();
@@ -110,19 +111,16 @@ const signout = async (req: Request, res: Response, next: NextFunction) => {
 
 const profile = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const { x_auth_token } = req.cookies;
+    const { x_auth_token } = req.headers as { x_auth_token: string };
 
     if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 
     if (!process.env.JWT_SECRET)
       return next(errorHandler(500, "JWT secret not defined"));
 
-    const decoded: JwtPayload = jwt.verify(
-      x_auth_token,
-      process.env.JWT_SECRET
-    ) as JwtPayload;
+    const tokenDecoded = getTokenDecoded(x_auth_token);
 
-    const user = await User.findById(decoded._id);
+    const user = await User.findById(tokenDecoded._id);
 
     if (!user) return next(errorHandler(404, "User not found"));
 

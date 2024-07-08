@@ -2,6 +2,7 @@ import { Question, User } from "../models/index.js";
 import { errorHandler } from "../utils/index.js";
 import { NextFunction, Request, Response } from "express";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { getTokenDecoded } from "../utils/token.js";
 
 const getQuestions = async (
   req: Request,
@@ -15,10 +16,7 @@ const getQuestions = async (
 
     if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 
-    const tokenDecoded = jwt.verify(
-      x_auth_token as string,
-      process.env.JWT_SECRET as string
-    ) as JwtPayload;
+    const tokenDecoded = getTokenDecoded(x_auth_token as string);
 
     const user = await User.findById(tokenDecoded._id);
 
@@ -45,10 +43,7 @@ const getQuestion = async (req: Request, res: Response, next: NextFunction) => {
 
     if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 
-    const tokenDecoded = jwt.verify(
-      x_auth_token as string,
-      process.env.JWT_SECRET as string
-    ) as JwtPayload;
+    const tokenDecoded = getTokenDecoded(x_auth_token as string);
 
     const user = await User.findById(tokenDecoded._id);
 
@@ -78,10 +73,7 @@ const questionAnswered = async (
 
     if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 
-    const tokenDecoded = jwt.verify(
-      x_auth_token as string,
-      process.env.JWT_SECRET as string
-    ) as JwtPayload;
+    const tokenDecoded = getTokenDecoded(x_auth_token as string);
 
     const user = await User.findById(tokenDecoded._id);
 

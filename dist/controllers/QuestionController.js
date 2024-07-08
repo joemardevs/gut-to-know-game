@@ -8,13 +8,10 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-var __importDefault = (this && this.__importDefault) || function (mod) {
-    return (mod && mod.__esModule) ? mod : { "default": mod };
-};
 Object.defineProperty(exports, "__esModule", { value: true });
 const index_js_1 = require("../models/index.js");
 const index_js_2 = require("../utils/index.js");
-const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
+const token_js_1 = require("../utils/token.js");
 const getQuestions = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         //get params
@@ -22,7 +19,7 @@ const getQuestions = (req, res, next) => __awaiter(void 0, void 0, void 0, funct
         const { x_auth_token } = req.headers;
         if (!x_auth_token)
             return next((0, index_js_2.errorHandler)(401, "User not authenticated"));
-        const tokenDecoded = jsonwebtoken_1.default.verify(x_auth_token, process.env.JWT_SECRET);
+        const tokenDecoded = (0, token_js_1.getTokenDecoded)(x_auth_token);
         const user = yield index_js_1.User.findById(tokenDecoded._id);
         if (!user)
             return next((0, index_js_2.errorHandler)(404, "User not found"));
@@ -43,7 +40,7 @@ const getQuestion = (req, res, next) => __awaiter(void 0, void 0, void 0, functi
         const { x_auth_token } = req.headers;
         if (!x_auth_token)
             return next((0, index_js_2.errorHandler)(401, "User not authenticated"));
-        const tokenDecoded = jsonwebtoken_1.default.verify(x_auth_token, process.env.JWT_SECRET);
+        const tokenDecoded = (0, token_js_1.getTokenDecoded)(x_auth_token);
         const user = yield index_js_1.User.findById(tokenDecoded._id);
         if (!user)
             return next((0, index_js_2.errorHandler)(404, "User not found"));
@@ -65,7 +62,7 @@ const questionAnswered = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         const { x_auth_token } = req.headers;
         if (!x_auth_token)
             return next((0, index_js_2.errorHandler)(401, "User not authenticated"));
-        const tokenDecoded = jsonwebtoken_1.default.verify(x_auth_token, process.env.JWT_SECRET);
+        const tokenDecoded = (0, token_js_1.getTokenDecoded)(x_auth_token);
         const user = yield index_js_1.User.findById(tokenDecoded._id);
         if (!user)
             return next((0, index_js_2.errorHandler)(404, "User not found"));

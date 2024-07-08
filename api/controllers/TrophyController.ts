@@ -2,6 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { errorHandler } from "../utils";
 import Trophy from "../models/Trophy";
 import jwt, { JwtPayload } from "jsonwebtoken";
+import { getTokenDecoded } from "../utils/token";
 
 const incrementTrophyForUser = async (
   req: Request,
@@ -14,10 +15,7 @@ const incrementTrophyForUser = async (
 
     if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
 
-    const tokenDecoded = jwt.verify(
-      x_auth_token as string,
-      process.env.JWT_SECRET as string
-    ) as JwtPayload;
+    const tokenDecoded = getTokenDecoded(x_auth_token as string);
 
     const trophy = await Trophy.findOne({ user: tokenDecoded._id });
 
