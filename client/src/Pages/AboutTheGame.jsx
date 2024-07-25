@@ -16,6 +16,7 @@ const AboutTheGame = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        padding: "20px",
       }}>
       <Box
         display="flex"

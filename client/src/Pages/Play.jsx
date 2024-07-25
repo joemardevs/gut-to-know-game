@@ -35,6 +35,7 @@ const Play = () => {
         backgroundPosition: "center",
         bgSize: "140% 70%",
         position: "relative",
+        padding: "20px",
       }}>
       <Box>
         <Flex>

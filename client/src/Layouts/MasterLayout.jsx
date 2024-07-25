@@ -31,7 +31,6 @@ const MasterLayout = ({ children, wrapperStyle, containerStyle }) => {
               base: "0",
               md: "lg",
             }}
-            padding="20px"
             border={{
               base: "none",
               md: "1px solid white",

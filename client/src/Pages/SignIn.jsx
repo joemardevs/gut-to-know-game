@@ -33,6 +33,7 @@ const SignIn = () => {
     <MasterLayout
       wrapperStyle={{
         backgroundColor: "#1A2421",
+        padding: "20px",
       }}>
       <Box
         mt={{

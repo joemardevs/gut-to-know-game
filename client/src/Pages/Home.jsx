@@ -61,6 +61,7 @@ export const Home = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        padding: "20px",
       }}>
       <Box>
         <Flex>
