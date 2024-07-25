@@ -74,4 +74,36 @@ const getUsersWithTrophies = (req, res, next) => __awaiter(void 0, void 0, void 
         next((0, utils_1.errorHandler)(500, error.message));
     }
 });
-exports.default = { incrementTrophyForUser, getUsersWithTrophies };
+const getCurrentUserTrophy = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { x_auth_token } = req.headers;
+        if (!x_auth_token)
+            return next((0, utils_1.errorHandler)(401, "User not authenticated"));
+        const tokenDecoded = (0, token_1.getTokenDecoded)(x_auth_token);
+        const trophy = yield Trophy_1.default.findOne({ user: tokenDecoded._id });
+        if (!trophy) {
+            return res.status(200).send({
+                success: true,
+                message: "User has no trophies",
+                data: {
+                    trophy: 0,
+                },
+            });
+        }
+        res.status(200).send({
+            success: true,
+            message: "User trophies",
+            data: {
+                trophy: trophy.trophy,
+            },
+        });
+    }
+    catch (error) {
+        next((0, utils_1.errorHandler)(500, error.message));
+    }
+});
+exports.default = {
+    incrementTrophyForUser,
+    getUsersWithTrophies,
+    getCurrentUserTrophy,
+};

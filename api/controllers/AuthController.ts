@@ -85,6 +85,7 @@ const signin = async (req: Request, res: Response, next: NextFunction) => {
           username: user.username,
           email: user.email,
           name: user.name,
+          avatar: user.avatar,
           token,
         },
       });
@@ -134,4 +135,40 @@ const profile = async (req: Request, res: Response, next: NextFunction) => {
   }
 };
 
-export default { signup, signin, signout, profile };
+const updateAvatar = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { x_auth_token } = req.headers as { x_auth_token: string };
+    const { avatar } = req.body;
+
+    if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
+
+    if (!process.env.JWT_SECRET)
+      return next(errorHandler(500, "JWT secret not defined"));
+
+    if (!avatar) return next(errorHandler(400, "Avatar is required"));
+
+    const tokenDecoded = getTokenDecoded(x_auth_token);
+
+    const user = await User.findById(tokenDecoded._id);
+
+    if (!user) return next(errorHandler(404, "User not found"));
+
+    user.avatar = avatar || user.avatar;
+
+    await user.save();
+
+    res.status(200).send({
+      success: true,
+      message: "User profile updated successfully",
+      user,
+    });
+  } catch (error: any) {
+    next(errorHandler(500, error.message));
+  }
+};
+
+export default { signup, signin, signout, profile, updateAvatar };

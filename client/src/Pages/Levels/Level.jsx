@@ -4,6 +4,7 @@ import {
   Badge,
   Box,
   Button,
+  Img,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -35,6 +36,7 @@ const Level = () => {
   const [levelData, setLevelData] = useState(null);
   const [questions, setQuestions] = useState([]);
   const [error, setError] = useState(null);
+  const [trophy, setTrophy] = useState(null);
 
   const fetchLevel = async () => {
     try {
@@ -89,6 +91,28 @@ const Level = () => {
     }
   };
 
+  const fetchUserTrophy = async () => {
+    try {
+      if (!user?.token) return;
+
+      const response = await fetch(`${BACKEND_URL}/api/trophy/my-trophy`, {
+        headers: {
+          x_auth_token: user?.token,
+        },
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw data;
+      }
+
+      setTrophy(data.trophy);
+    } catch (error) {
+      setError(error);
+    }
+  };
+
   const shuffleArray = array => {
     for (let i = array.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
@@ -115,6 +139,7 @@ const Level = () => {
   useEffect(() => {
     document.title = `Level ${level}`;
     fetchLevel();
+    fetchUserTrophy();
   }, [user]);
 
   if (error) {
@@ -144,17 +169,22 @@ const Level = () => {
           direction="row"
           alignItems="center"
           justifyContent="center"
-          bg="grey"
+          bg="rgba(0,0,0,0.5)"
           gap="1rem"
-          px="5"
-          py="1"
-          rounded="5">
-          <Badge colorScheme="yellow">
+          p="5">
+          <Img src="/assets/logo_main.png" w="50px" />
+          <Badge colorScheme="yellow" fontSize=".5em">
             Level {levelData?.level?.level || "N/A"}
           </Badge>
-          <Text color="white" fontSize=".80em">
+          <Text color="white" fontSize=".65em">
             {levelData?.level?.header || "N/A"}
           </Text>
+          <Box display="flex" alignItems="center">
+            <Text color="white" fontSize="1rem">
+              {trophy || "N/A"}
+            </Text>
+            <Img src="/assets/trophy.png" w="75px" />
+          </Box>
         </Stack>
 
         <Wrap justify="center" mt="5" spacing="2rem">
@@ -243,10 +273,10 @@ const Level = () => {
       <Stack
         direction="row"
         alignItems="center"
-        justify="center"
+        justifyContent="center"
+        bg="rgba(0,0,0,0.5)"
         gap="1rem"
-        px="5"
-        py="1">
+        p="5">
         <Button
           onClick={onOpen}
           size="sm"

@@ -82,4 +82,42 @@ const getUsersWithTrophies = async (
   }
 };
 
-export default { incrementTrophyForUser, getUsersWithTrophies };
+const getCurrentUserTrophy = async (
+  req: Request,
+  res: Response,
+  next: NextFunction
+) => {
+  try {
+    const { x_auth_token } = req.headers;
+
+    if (!x_auth_token) return next(errorHandler(401, "User not authenticated"));
+
+    const tokenDecoded = getTokenDecoded(x_auth_token as string);
+
+    const trophy = await Trophy.findOne({ user: tokenDecoded._id });
+
+    if (!trophy) {
+      return res.status(200).send({
+        success: true,
+        message: "User has no trophies",
+        data: {
+          trophy: 0,
+        },
+      });
+    }
+
+    res.status(200).send({
+      success: true,
+      message: "User trophy",
+      trophy: trophy.trophy,
+    });
+  } catch (error: any) {
+    next(errorHandler(500, error.message));
+  }
+};
+
+export default {
+  incrementTrophyForUser,
+  getUsersWithTrophies,
+  getCurrentUserTrophy,
+};

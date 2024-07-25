@@ -49,6 +49,7 @@ const Competitions = () => {
       }
 
       setTopUsers(data.users);
+      console.log(data.users);
       setPage(data.pagination.page);
       setTotalPages(data.pagination.totalPages);
     } catch (error) {
@@ -72,7 +73,7 @@ const Competitions = () => {
     document.title = "Competitions";
 
     getTopUsers(page, limit);
-  }, [user, page]);
+  }, [user]);
 
   return (
     <MasterLayout
@@ -82,6 +83,7 @@ const Competitions = () => {
         backgroundSize: "cover",
         backgroundRepeat: "no-repeat",
         backgroundPosition: "center",
+        padding: "20px",
       }}>
       <IconButton
         onClick={() => navigate(-1)}
@@ -125,12 +127,20 @@ const Competitions = () => {
                       topUser.user._id === user._id ? "green" : "transparent"
                     }>
                     <Td
-                      color={topUser.user._id === user._id ? "white" : "black"}>
+                      color={
+                        topUser.user.username === user.username
+                          ? "white"
+                          : "black"
+                      }>
                       {topUser.user.username}
-                      {topUser.user._id === user._id && " (You)"}
+                      {topUser.user.username === user.username && " (You)"}
                     </Td>
                     <Td
-                      color={topUser.user._id === user._id ? "white" : "black"}
+                      color={
+                        topUser.user.username === user.username
+                          ? "white"
+                          : "black"
+                      }
                       display="flex"
                       flexDirection="row"
                       alignItems="center">

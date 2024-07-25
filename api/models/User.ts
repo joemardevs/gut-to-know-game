@@ -3,6 +3,10 @@ import { QuestionSchema } from "./Question";
 
 const userSchema = new mongoose.Schema(
   {
+    avatar: {
+      type: Number,
+      default: 1,
+    },
     username: {
       type: String,
       required: true,

@@ -14,5 +14,6 @@ authRouter.post("/signup", signupValidator, validate, AuthController.signup);
 authRouter.post("/signout", authMiddleware, AuthController.signout);
 
 authRouter.get("/profile", authMiddleware, AuthController.profile);
+authRouter.put("/update-avatar", authMiddleware, AuthController.updateAvatar);
 
 export default authRouter;

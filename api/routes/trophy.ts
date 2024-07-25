@@ -5,6 +5,11 @@ import { TrophyController } from "../controllers/index.js";
 const trophyRouter = express.Router();
 
 trophyRouter.get("/", authMiddleware, TrophyController.getUsersWithTrophies);
+trophyRouter.get(
+  "/my-trophy",
+  authMiddleware,
+  TrophyController.getCurrentUserTrophy
+);
 trophyRouter.post(
   "/increment-trophy",
   authMiddleware,

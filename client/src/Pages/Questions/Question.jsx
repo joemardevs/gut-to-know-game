@@ -123,7 +123,7 @@ const Question = () => {
       if (!user?.token) return;
 
       const reponse = await fetch(
-        "${BACKEND_URL}/api/trophy/increment-trophy",
+        `${BACKEND_URL}/api/trophy/increment-trophy`,
         {
           method: "POST",
           headers: {
